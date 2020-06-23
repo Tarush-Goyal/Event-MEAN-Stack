@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxFlexFill>
+
+    <ul class="no-bullets">
+      <li><a routerLink="/">Home</a></li>
+    </ul>
+    <ul class="no-bullets" *ngIf="auth.isLoggedIn()">
+      <li><a routerLink="/eventform">Create Event</a></li>
+    </ul>
+    <ul class="no-bullets" *ngIf="auth.isLoggedIn()">
+      <li><a routerLink="/eventlist">List Event</a></li>
+    </ul>
+    <ul class="no-bullets" *ngIf="auth.isLoggedIn()">
+      <li>
+        <a routerLink="/profile">{{ auth.getUserDetails()?.name }}</a>
+      </li>
+    </ul>
+    <ul class="no-bullets" *ngIf="!auth.isLoggedIn()">
+      <li>
+        <a routerLink="/register">Register</a>
+      </li>
+    </ul>
+    <ul class="no-bullets">
+      <li *ngIf="!auth.isLoggedIn()"><a routerLink="/login">Sign in</a></li>
+      <li *ngIf="auth.isLoggedIn()"><a (click)="auth.logout()">Logout</a></li>
+    </ul>
+</div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

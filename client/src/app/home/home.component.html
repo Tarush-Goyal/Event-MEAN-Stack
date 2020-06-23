@@ -1,0 +1,7 @@
+<div fxLayout="column" fxLayoutAlign=" center" fxLayoutGap="30px">
+  <h1 fxFlexOffset="8rem">Hello there!</h1>
+  <p *ngIf="!auth.isLoggedIn()">
+    Please Sign in or Register <a routerLink="/register">Here</a>
+  </p>
+  <p *ngIf="auth.isLoggedIn()">Lets Create Some Events <a routerLink="/eventform">Here</a></p>
+</div>

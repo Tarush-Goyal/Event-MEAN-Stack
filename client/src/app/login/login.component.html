@@ -1,0 +1,45 @@
+<div fxLayout="column">
+  <mat-toolbar *ngIf="errorMsg" fxLayoutAlign="center center" color="warn">
+    {{errorMsg}}
+  </mat-toolbar>
+
+  <div fxFlexOffset="100px" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+
+
+    <mat-card class="container" fxFlex="30">
+
+      <mat-card-title fxLayout="row" fxLayoutAlign="center center">Login</mat-card-title>
+
+      <br>
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div fxLayout="column" fxLayoutAlign="center center">
+
+            <mat-form-field>
+              <input matInput placeholder="E-mail" formControlName="email">
+              <mat-error *ngIf="loginForm.get('email').hasError('required')">E-mail is required</mat-error>
+              <mat-error *ngIf="loginForm.get('email').hasError('email')">E-mail is invalid</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Password" [type]="Type" ng-blur="focus=false" (click)="onFocus()" formControlName="password">
+              <button mat-icon-button matSuffix color="primary" type="button" [disabled]="loginForm.get('password').value.length<1" (click)="showPassword()">
+                <mat-icon>{{visible}}</mat-icon>
+              </button>
+
+              <mat-error *ngIf="loginForm.get('password').hasError('required')">Password is required</mat-error>
+              <mat-error *ngIf="loginForm.get('password').hasError('minlength')">Password is invalid</mat-error>
+            </mat-form-field>
+
+
+          </div>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button type="button" (click)="register()" color="primary">Create Account</button>
+            <button [disabled]="!loginForm.valid" mat-raised-button type="submit" color="primary">Login</button>
+
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

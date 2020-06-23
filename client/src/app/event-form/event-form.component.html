@@ -1,0 +1,65 @@
+<div fxLayout fxLayoutAlign="space-around center">
+
+  <div fxLayout="column" fxLayoutAlign=" center" fxLayoutGap="20px">
+
+    <div>
+      <h1>Create New Event</h1>
+    </div>
+
+    <div>
+      <form [formGroup]="eventForm" (ngSubmit)="submit()">
+        <div fxLayout="column" fxLayoutGap="60px" fxLayoutAlign=" center">
+
+          <div fxLayout="row" fxLayoutGap="50px">
+
+            <mat-form-field style="width:225px">
+              <input matInput placeholder="Event Name" formControlName="name">
+              <mat-error *ngIf="eventForm.get('name').hasError('required')">Event Name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field style="width:225px">
+              <input matInput placeholder="Ticket Cost(₹)" formControlName="cost">
+              <mat-error *ngIf="eventForm.get('cost').hasError('required')">Ticket Cost is required</mat-error>
+              <mat-error *ngIf="eventForm.get('cost').hasError('pattern')">Ticket Cost must be a number</mat-error>
+            </mat-form-field>
+
+          </div>
+          <div fxLayout="row" fxLayoutGap="50px">
+            <mat-form-field style="width:225px">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="Sports">Sports</mat-option>
+                <mat-option value="Concert">Concert</mat-option>
+                <mat-option value="Educational">Educational</mat-option>
+                <mat-option value="Food">Food</mat-option>
+                <mat-option value="Cinema">Cinema</mat-option>
+              </mat-select>
+              <mat-error *ngIf="eventForm.get('type').hasError('required')">Type is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field style="width:225px">
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field style="width:225px">
+            <input matInput placeholder="City" formControlName="city">
+            <mat-error *ngIf="eventForm.get('city').hasError('required')">City is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field style="width:500px">
+            <textarea matInput placeholder="Description" formControlName="description"></textarea>
+          </mat-form-field>
+
+          <button disabled={{eventForm.invalid}} mat-raised-button type="submit" color="accent">Submit</button>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
